@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Online_Bookshop_Final_Project.Models.Book>
+
+@{
+    ViewData["Title"] = "WishList";
+}
+
+<h1>WishList</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                   <img class="img-thumbnail" style="height:30vh; width:200px" src="/books/@Html.DisplayFor(modelItem => item.ImageUrl)"/>
+                </td>
+                <td>
+
+                    <a class="btn btn-outline-dark" asp-action="Remove" asp-route-id="@item.Id">Remove</a> |
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a class="btn btn-outline-dark" href="/BookSalesRecords/Create">Place Order</a> |

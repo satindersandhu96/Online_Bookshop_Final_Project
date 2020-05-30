@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Online_Bookshop_Final_Project.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<h1>Books</h1>
+
+<p>
+    <a class="btn-outline-dark" asp-action="Create">Add Book</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    <img style="height:30vh; width:200px" class="img-thumbnail" src="/books/@Html.DisplayFor(modelItem => item.ImageUrl)" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                
+                @if (SignInManager.IsSignedIn(User) && User.IsInRole("shop_admin")) {
+
+                <td>
+                    <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                 
+                    <a class="btn btn-outline-dark" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+                } else {
+
+                <td>
+                    <a class="btn btn-outline-dark" asp-action="AddBookToWishList" asp-route-id="@item.Id">Add To Wish List</a>
+
+                </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,21 @@
+﻿@model Online_Bookshop_Final_Project.Models.BookSalesRecord
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>BookSalesRecord</h4>
+<hr />
+<div class="row">
+    <h3>  Thank your for ordering Your Order Id  @ViewBag.OrderId </h3>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
